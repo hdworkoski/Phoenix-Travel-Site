@@ -244,22 +244,22 @@
                                 </tr>
                                 <tr>
                                     <td class="text-info text-center">
-                                        3820483
+                                        3894820
                                     </td>
                                     <td class="text-center">
-                                        482927394
+                                        293830584
                                     </td>
                                     <td class="text-center">
-                                        5
+                                        3
                                     </td>
                                     <td class="text-center">
-                                        Amazing trip!
+                                        Trip was ok.
                                     </td>
                                     <td class="text-center">
-                                        Everything
+                                        Tour Guide
                                     </td>
                                     <td class="text-center">
-                                        None
+                                        Itinerary
                                     </td>
                                     <td class="text-center">
                                         <i class="material-icons text-gray">edit</i>
