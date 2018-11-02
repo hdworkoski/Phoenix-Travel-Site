@@ -31,12 +31,14 @@
             <p>Trips</p>
         </a>
     </li>
+    @if(\Illuminate\Support\Facades\Auth::user()->role == 'manager')
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/staff') }}">
             <i class="material-icons">work</i>
             <p>Staff</p>
         </a>
     </li>
+    @endif
     <li class="nav-item active">
         <a class="nav-link" href="{{ url('/vehicles') }}">
             <i class="material-icons">directions_car</i>
@@ -56,19 +58,6 @@
 @endsection
 
 @section('content')
-    <div style="margin-left:55%;margin-right:5%;">
-        <div class="justify-content-end">
-            <form class="form-search justify-content-end">
-                <div class="input-group no-border">
-                    <input type="text" value="" class="form-control" placeholder="Search for a Vehicle...">
-                    <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                        <i class="material-icons">search</i>
-                        <div class="ripple-container"></div>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -116,33 +105,34 @@
                                 </th>
                                 </thead>
                                 <tbody>
+                                @foreach($vehicles as $v)
                                 <tr>
                                     <td class="text-info text-center">
-                                        39ejd9
+                                        {{ $v->Rego_No }}
                                     </td>
                                     <td class="text-center">
-                                        2038398493
+                                        {{ $v->VIN }}
                                     </td>
                                     <td class="text-center">
-                                        Mitsubishi
+                                        {{ $v->Make }}
                                     </td>
                                     <td class="text-center">
-                                        Rosa
+                                        {{ $v->Model }}
                                     </td>
                                     <td class="text-center">
-                                        2014
+                                        {{ $v->Year }}
                                     </td>
                                     <td class="text-center">
-                                        25
+                                        {{ $v->Capacity }}
                                     </td>
                                     <td class="text-center">
-                                        Regular
+                                        {{ $v->Fuel_Type }}
                                     </td>
                                     <td class="text-center">
-                                        None
+                                        {{ $v->Equipment }}
                                     </td>
                                     <td class="text-center">
-                                        Bus License
+                                        {{ $v->Licence_Required }}
                                     </td>
                                     <td class="text-center">
                                         <i class="material-icons text-gray">edit</i>
@@ -151,181 +141,7 @@
                                         <i class="material-icons text-danger">delete</i>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        39ejd9
-                                    </td>
-                                    <td class="text-center">
-                                        2038398493
-                                    </td>
-                                    <td class="text-center">
-                                        Mitsubishi
-                                    </td>
-                                    <td class="text-center">
-                                        Rosa
-                                    </td>
-                                    <td class="text-center">
-                                        2014
-                                    </td>
-                                    <td class="text-center">
-                                        25
-                                    </td>
-                                    <td class="text-center">
-                                        Regular
-                                    </td>
-                                    <td class="text-center">
-                                        None
-                                    </td>
-                                    <td class="text-center">
-                                        Bus License
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        39ejd9
-                                    </td>
-                                    <td class="text-center">
-                                        2038398493
-                                    </td>
-                                    <td class="text-center">
-                                        Mitsubishi
-                                    </td>
-                                    <td class="text-center">
-                                        Rosa
-                                    </td>
-                                    <td class="text-center">
-                                        2014
-                                    </td>
-                                    <td class="text-center">
-                                        25
-                                    </td>
-                                    <td class="text-center">
-                                        Regular
-                                    </td>
-                                    <td class="text-center">
-                                        None
-                                    </td>
-                                    <td class="text-center">
-                                        Bus License
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        39ejd9
-                                    </td>
-                                    <td class="text-center">
-                                        2038398493
-                                    </td>
-                                    <td class="text-center">
-                                        Mitsubishi
-                                    </td>
-                                    <td class="text-center">
-                                        Rosa
-                                    </td>
-                                    <td class="text-center">
-                                        2014
-                                    </td>
-                                    <td class="text-center">
-                                        25
-                                    </td>
-                                    <td class="text-center">
-                                        Regular
-                                    </td>
-                                    <td class="text-center">
-                                        None
-                                    </td>
-                                    <td class="text-center">
-                                        Bus License
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        39ejd9
-                                    </td>
-                                    <td class="text-center">
-                                        2038398493
-                                    </td>
-                                    <td class="text-center">
-                                        Mitsubishi
-                                    </td>
-                                    <td class="text-center">
-                                        Rosa
-                                    </td>
-                                    <td class="text-center">
-                                        2014
-                                    </td>
-                                    <td class="text-center">
-                                        25
-                                    </td>
-                                    <td class="text-center">
-                                        Regular
-                                    </td>
-                                    <td class="text-center">
-                                        None
-                                    </td>
-                                    <td class="text-center">
-                                        Bus License
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        39ejd9
-                                    </td>
-                                    <td class="text-center">
-                                        2038398493
-                                    </td>
-                                    <td class="text-center">
-                                        Mitsubishi
-                                    </td>
-                                    <td class="text-center">
-                                        Rosa
-                                    </td>
-                                    <td class="text-center">
-                                        2014
-                                    </td>
-                                    <td class="text-center">
-                                        25
-                                    </td>
-                                    <td class="text-center">
-                                        Regular
-                                    </td>
-                                    <td class="text-center">
-                                        None
-                                    </td>
-                                    <td class="text-center">
-                                        Bus License
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

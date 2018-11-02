@@ -31,12 +31,14 @@
         <p>Trips</p>
     </a>
 </li>
+@if(\Illuminate\Support\Facades\Auth::user()->role == 'manager')
 <li class="nav-item">
     <a class="nav-link" href="{{ url('/staff') }}">
         <i class="material-icons">work</i>
         <p>Staff</p>
     </a>
 </li>
+@endif
 <li class="nav-item">
     <a class="nav-link" href="{{ url('/vehicles') }}">
         <i class="material-icons">directions_car</i>
@@ -72,7 +74,7 @@
                 </div>
                 <div class="card-body">
                     <p class="card-category">
-                        <span class="text-success">2</span> new customers to be approved.</p>
+                        <span class="text-success">{{ $count }}</span> new customers to be approved.</p>
                 </div>
                 <div class="card-footer">
                     <div class="stats">

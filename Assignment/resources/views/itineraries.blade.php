@@ -31,12 +31,14 @@
             <p>Trips</p>
         </a>
     </li>
+    @if(\Illuminate\Support\Facades\Auth::user()->role == 'manager')
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/staff') }}">
             <i class="material-icons">work</i>
             <p>Staff</p>
         </a>
     </li>
+    @endif
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/vehicles') }}">
             <i class="material-icons">directions_car</i>
@@ -58,6 +60,31 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
+        @if($tour)
+            @if($add == 0)
+        <form action="/itineraries/{{ $tour }}/add" method="GET">
+            {{ csrf_field() }}
+            <button type="submit" class="btn btn-default">Add Itinerary For Tour #{{ $tour }}</button>
+        </form>
+            @endif
+        @endif
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title">Tour #{{ $tour }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <h4>Name:</h4><p>{{ $t[0]->Tour_Name }}</p>
+                        <h4>Description:</h4><p>{{ $t[0]->Description }}</p>
+                        <h4>Duration:</h4><p>{{ $t[0]->Duration }}</p>
+                        <h4>Route Map:</h4><p>{{ $t[0]->Route_Map }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-info">
@@ -68,19 +95,22 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class="text-info">
-                                <th>
+                                <th class="text-center">
                                     Itinerary ID
                                 </th>
-                                <th>
+                                <th class="text-center">
                                     Tour Number
                                 </th>
-                                <th>
+                                <th class="text-center">
                                     Day Number
                                 </th>
-                                <th>
+                                <th class="text-center">
+                                    Hotel Booking Number
+                                </th>
+                                <th class="text-center">
                                     Activities
                                 </th>
-                                <th>
+                                <th class="text-center">
                                     Meals
                                 </th>
                                 <th>
@@ -91,144 +121,96 @@
                                 </th>
                                 </thead>
                                 <tbody>
+                                @foreach($itineraries as $i)
                                 <tr>
-                                    <td class="text-info">
-                                        1234567890
+                                    <td class="text-info text-center">
+                                        {{ $i->id }}
                                     </td>
-                                    <td>
-                                        1
+                                    <td class="text-center">
+                                        {{ $i->Tour_No }}
                                     </td>
-                                    <td>
-                                        1
+                                    <td class="text-center">
+                                        {{ $i->Day_No }}
                                     </td>
-                                    <td>
-                                        Check in to hotel.
+                                    <td class="text-center">
+                                        {{ $i->Hotel_Booking_No }}
                                     </td>
-                                    <td>
-                                        Dinner at the hotel restaurant.
+                                    <td class="text-center">
+                                        {{ $i->Activities }}
                                     </td>
-                                    <td>
-                                        <i class="material-icons text-gray">edit</i>
+                                    <td class="text-center">
+                                        {{ $i->Meals }}
                                     </td>
-                                    <td>
-                                        <i class="material-icons text-danger">delete</i>
+                                    <td class="text-center">
+                                        <form action="/itinerary/edit/{{ $i->id }}" method="GET">
+                                            {{ csrf_field() }}
+                                            {{ method_field('UPDATE') }}
+
+                                            <button type="submit" class="btn bg-white">
+                                                <i class="material-icons text-success">edit</i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td class="text-center">
+                                        <form action="/itineraries/{{ $i->id }}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+
+                                            <button type="submit" class="btn bg-white btnDeleteItinerary">
+                                                <i class="material-icons text-danger">delete</i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="text-info">
-                                        3820472048
-                                    </td>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        2
-                                    </td>
-                                    <td>
-                                        Museum.
-                                    </td>
-                                    <td>
-                                        Breakfast at hotel, lunch at museum, dinner at pub.
-                                    </td>
-                                    <td>
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td>
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info">
-                                        1038492734
-                                    </td>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        3
-                                    </td>
-                                    <td>
-                                        Park.
-                                    </td>
-                                    <td>
-                                        Breakfast at hotel, lunch in city, dinner at hotel.
-                                    </td>
-                                    <td>
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td>
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info">
-                                        3928403829
-                                    </td>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        4
-                                    </td>
-                                    <td>
-                                        Football game.
-                                    </td>
-                                    <td>
-                                        Breakfast at hotel, lunch at stadium, dinner at pub.
-                                    </td>
-                                    <td>
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td>
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info">
-                                        4028392839
-                                    </td>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        5
-                                    </td>
-                                    <td>
-                                        Wineries.
-                                    </td>
-                                    <td>
-                                        Breakfast at hotel, lunch at winery, no dinner included.
-                                    </td>
-                                    <td>
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td>
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info">
-                                        4028374937
-                                    </td>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        6
-                                    </td>
-                                    <td>
-                                        Check out of hotel.
-                                    </td>
-                                    <td>
-                                        Breakfast at hotel.
-                                    </td>
-                                    <td>
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td>
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
+                                @endforeach
+                                @if($add > 0)
+                                    <tr>
+                                        <form action="{{ action('ItineraryController@commit') }}" method="POST" class="form-horizontal">
+                                        {!! csrf_field() !!}
+                                        <td class="text-info text-center">
+                                            &nbsp;
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="form-group">
+                                            <input type="number" name="Tour_No" id="Tour_No" class="form-control" value="{{ $tour }}" hidden>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="form-group">
+                                            <input type="number" name="Day_No" id="Day_No" class="form-control" placeholder="Day Number">
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="form-group">
+                                            <input type="text" name="Hotel_Booking_No" id="Hotel_Booking_No" class="form-control" placeholder="Hotel Booking Number">
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="form-group">
+                                            <input type="text" name="Activities" id="Activities" class="form-control" placeholder="Activities">
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="form-group">
+                                            <input type="text" name="Meals" id="Meals" class="form-control" placeholder="Meals">
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="form-group">
+                                                <button type="submit" class="btn bg-white">
+                                                <i class="material-icons text-success">check</i>
+                                            </button>
+                                            </div>
+                                        </td></form>
+                                        <form action="/itineraries/{{ $tour }}" method="GET">
+                                        <td class="text-center">
+                                            <button type="submit" class="btn bg-white">
+                                                <i class="material-icons text-danger">cancel</i>
+                                            </button>
+                                        </td>
+                                        </form>
+                                    </tr>
+                                @endif
                                 </tbody>
                             </table>
                         </div>
@@ -237,7 +219,7 @@
             </div>
         </div>
         <div class="row">
-            <a class="text-white" href="{{ url('/tours') }}"><button class="btn btn-info pull-left">Back to Tours</button></a>
+            <a class="text-white" href="{{ url('/tours') }}"><button class="btn btn-info pull-left btn-default">Back to Tours</button></a>
         </div>
     </div>
 @endsection

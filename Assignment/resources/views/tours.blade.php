@@ -31,12 +31,14 @@
             <p>Trips</p>
         </a>
     </li>
+    @if(\Illuminate\Support\Facades\Auth::user()->role == 'manager')
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/staff') }}">
             <i class="material-icons">work</i>
             <p>Staff</p>
         </a>
     </li>
+    @endif
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/vehicles') }}">
             <i class="material-icons">directions_car</i>
@@ -56,20 +58,13 @@
 @endsection
 
 @section('content')
-    <div style="margin-left:55%;margin-right:5%;">
-        <div class="justify-content-end">
-        <form class="form-search justify-content-end">
-            <div class="input-group no-border">
-                <input type="text" value="" class="form-control" placeholder="Search for a Tour...">
-                <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                    <i class="material-icons">search</i>
-                    <div class="ripple-container"></div>
-                </button>
-            </div>
-        </form>
-        </div>
-    </div>
+@if (count($tour) > 0)
     <div class="container-fluid">
+        @if($error == 1)
+            <div class="badge-danger">
+                You cannot delete a tour that has associated trips or itineraries.
+            </div>
+        @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -107,174 +102,54 @@
                                 </th>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        1
-                                    </td>
-                                    <td class="text-center">
-                                        Canberra
-                                    </td>
-                                    <td class="text-center">
-                                        This tour goes to many places around Canberra including the Parliament building and the National Gallery.
-                                    </td>
-                                    <td class="text-center">
-                                        7 days
-                                    </td>
-                                    <td class="text-center">
-                                        CanberraRouteMap.pdf
-                                    </td>
-                                    <td class="text-center">
-                                        <a class="nav-link" href="{{ url('/itineraries') }}">
-                                            <i class="material-icons text-success">schedule</i>
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        1
-                                    </td>
-                                    <td class="text-center">
-                                        Canberra
-                                    </td>
-                                    <td class="text-center">
-                                        This tour goes to many places around Canberra including the Parliament building and the National Gallery.
-                                    </td>
-                                    <td class="text-center">
-                                        7 days
-                                    </td>
-                                    <td class="text-center">
-                                        CanberraRouteMap.pdf
-                                    </td>
-                                    <td class="text-center">
-                                        <a class="nav-link" href="{{ url('/itineraries') }}">
-                                            <i class="material-icons text-success">schedule</i>
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        1
-                                    </td>
-                                    <td class="text-center">
-                                        Canberra
-                                    </td>
-                                    <td class="text-center">
-                                        This tour goes to many places around Canberra including the Parliament building and the National Gallery.
-                                    </td>
-                                    <td class="text-center">
-                                        7 days
-                                    </td>
-                                    <td class="text-center">
-                                        CanberraRouteMap.pdf
-                                    </td>
-                                    <td class="text-center">
-                                        <a class="nav-link" href="{{ url('/itineraries') }}">
-                                            <i class="material-icons text-success">schedule</i>
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        1
-                                    </td>
-                                    <td class="text-center">
-                                        Canberra
-                                    </td>
-                                    <td class="text-center">
-                                        This tour goes to many places around Canberra including the Parliament building and the National Gallery.
-                                    </td>
-                                    <td class="text-center">
-                                        7 days
-                                    </td>
-                                    <td class="text-center">
-                                        CanberraRouteMap.pdf
-                                    </td>
-                                    <td class="text-center">
-                                        <a class="nav-link" href="{{ url('/itineraries') }}">
-                                            <i class="material-icons text-success">schedule</i>
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        1
-                                    </td>
-                                    <td class="text-center">
-                                        Canberra
-                                    </td>
-                                    <td class="text-center">
-                                        This tour goes to many places around Canberra including the Parliament building and the National Gallery.
-                                    </td>
-                                    <td class="text-center">
-                                        7 days
-                                    </td>
-                                    <td class="text-center">
-                                        CanberraRouteMap.pdf
-                                    </td>
-                                    <td class="text-center">
-                                        <a class="nav-link" href="{{ url('/itineraries') }}">
-                                            <i class="material-icons text-success">schedule</i>
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        1
-                                    </td>
-                                    <td class="text-center">
-                                        Canberra
-                                    </td>
-                                    <td class="text-center">
-                                        This tour goes to many places around Canberra including the Parliament building and the National Gallery.
-                                    </td>
-                                    <td class="text-center">
-                                        7 days
-                                    </td>
-                                    <td class="text-center">
-                                        CanberraRouteMap.pdf
-                                    </td>
-                                    <td class="text-center">
-                                        <a class="nav-link" href="{{ url('/itineraries') }}">
-                                            <i class="material-icons text-success">schedule</i>
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
+                                @foreach ($tour as $t)
+                                    <tr>
+                                        <td class="text-info text-center">
+                                            <div>{{ $t->Tour_No }}</div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div>{{ $t->Tour_Name }}</div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div>{{ $t->Description }}</div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div>{{ $t->Duration }}</div> Days
+                                        </td>
+                                        <td class="text-center">
+                                            <div>{{ str_limit($t->Route_Map, $limit = 20, $end = '...') }}</div>
+                                        </td>
+                                        <td class="text-center">
+                                            <form action="/itineraries/{{ $t->Tour_No }}" method="GET">
+                                                {{ csrf_field() }}
+
+                                                <button type="submit" class="btn bg-white">
+                                                    <i class="material-icons text-warning">schedule</i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td class="text-center">
+                                            <form action="/tour/{{ $t->Tour_No }}" method="GET">
+                                                {{ csrf_field() }}
+                                                {{ method_field('UPDATE') }}
+
+                                                <button type="submit" class="btn bg-white">
+                                                    <i class="material-icons text-success">edit</i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td class="text-center">
+                                            <form action="/tour/{{ $t->Tour_No }}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+
+                                                <button type="submit" class="btn bg-white btnDeleteTour">
+                                                    <i class="material-icons text-danger">delete</i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -282,5 +157,11 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <a class="text-white" href="{{ url('/tour') }}"><button class="btn btn-default pull-left">Add New Tour</button></a>
+            &nbsp;
+            <a class="text-white" href="{{ url('/tours/departures') }}"><button class="btn btn-default">View Tour Departures</button></a>
+        </div>
     </div>
+@endif
 @endsection

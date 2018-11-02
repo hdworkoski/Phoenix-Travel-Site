@@ -31,12 +31,14 @@
             <p>Trips</p>
         </a>
     </li>
+    @if(\Illuminate\Support\Facades\Auth::user()->role == 'manager')
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/staff') }}">
             <i class="material-icons">work</i>
             <p>Staff</p>
         </a>
     </li>
+    @endif
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/vehicles') }}">
             <i class="material-icons">directions_car</i>
@@ -56,145 +58,27 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header card-header-info">
-                        <h4 class="card-title">New Reviews</h4>
-                        <p class="card-category">Reviews to be approved</p>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class="text-info">
-                                <th class="text-center">
-                                    Trip ID
-                                </th>
-                                <th class="text-center">
-                                    Customer ID
-                                </th>
-                                <th class="text-center">
-                                    Rating
-                                </th>
-                                <th class="text-center">
-                                    General Feedback
-                                </th>
-                                <th class="text-center">
-                                    Likes
-                                </th>
-                                <th class="text-center">
-                                    Dislikes
-                                </th>
-                                <th class="text-center">
-                                    &nbsp;
-                                </th>
-                                <th class="text-center">
-                                    &nbsp;
-                                </th>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        1234567
-                                    </td>
-                                    <td class="text-center">
-                                        123456789
-                                    </td>
-                                    <td class="text-center">
-                                        4
-                                    </td>
-                                    <td class="text-center">
-                                        Great trip. Hotel could have been better.
-                                    </td>
-                                    <td class="text-center">
-                                        Tour guide
-                                    </td>
-                                    <td class="text-center">
-                                        Hotel
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-success">check</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">cancel</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        3820483
-                                    </td>
-                                    <td class="text-center">
-                                        482927394
-                                    </td>
-                                    <td class="text-center">
-                                        5
-                                    </td>
-                                    <td class="text-center">
-                                        Amazing trip!
-                                    </td>
-                                    <td class="text-center">
-                                        Everything
-                                    </td>
-                                    <td class="text-center">
-                                        None
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-success">check</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">cancel</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        3920473
-                                    </td>
-                                    <td class="text-center">
-                                        103829472
-                                    </td>
-                                    <td class="text-center">
-                                        3
-                                    </td>
-                                    <td class="text-center">
-                                        Trip was ok. Food was not good.
-                                    </td>
-                                    <td class="text-center">
-                                        Hotel, Bus
-                                    </td>
-                                    <td class="text-center">
-                                        Food
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-success">check</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">cancel</i>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+<div class="container-fluid">
+    <div class="row">
+        &nbsp;
+        <a href="/reviews/trips" class="btn btn-default">Review Statistics - Trips</a>&nbsp;&nbsp;
+        <a href="/reviews/tours" class="btn btn-default">Review Statistics - Tours</a>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-info">
+                    <h4 class="card-title">Customer Reviews</h4>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header card-header-info">
-                        <h4 class="card-title">Existing Reviews</h4>
-                        <p class="card-category">All Review Details</p>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class="text-info">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-info">
                                 <th class="text-center">
-                                    Trip ID
+                                    Review ID
                                 </th>
                                 <th class="text-center">
-                                    Customer ID
+                                    Trip Booking Number
                                 </th>
                                 <th class="text-center">
                                     Rating
@@ -208,176 +92,36 @@
                                 <th class="text-center">
                                     Dislikes
                                 </th>
-                                <th class="text-center">
-                                    &nbsp;
-                                </th>
-                                <th class="text-center">
-                                    &nbsp;
-                                </th>
-                                </thead>
-                                <tbody>
+                            </thead>
+                            <tbody>
+                            @foreach($reviews as $r)
                                 <tr>
                                     <td class="text-info text-center">
-                                        2984040
+                                        {{ $r->Review_id }}
                                     </td>
                                     <td class="text-center">
-                                        502058385
+                                        {{ $r->Trip_Booking_No }}
                                     </td>
                                     <td class="text-center">
-                                        2
+                                        {{ $r->Rating }}
                                     </td>
                                     <td class="text-center">
-                                        Bad trip!
+                                        {{ $r->General_Feedback }}
                                     </td>
                                     <td class="text-center">
-                                        None
+                                        {{ $r->Likes }}
                                     </td>
                                     <td class="text-center">
-                                        Everything
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
+                                        {{ $r->Dislikes }}
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        3894820
-                                    </td>
-                                    <td class="text-center">
-                                        293830584
-                                    </td>
-                                    <td class="text-center">
-                                        3
-                                    </td>
-                                    <td class="text-center">
-                                        Trip was ok.
-                                    </td>
-                                    <td class="text-center">
-                                        Tour Guide
-                                    </td>
-                                    <td class="text-center">
-                                        Itinerary
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        3820483
-                                    </td>
-                                    <td class="text-center">
-                                        482927394
-                                    </td>
-                                    <td class="text-center">
-                                        5
-                                    </td>
-                                    <td class="text-center">
-                                        Amazing trip!
-                                    </td>
-                                    <td class="text-center">
-                                        Everything
-                                    </td>
-                                    <td class="text-center">
-                                        None
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        3820483
-                                    </td>
-                                    <td class="text-center">
-                                        482927394
-                                    </td>
-                                    <td class="text-center">
-                                        5
-                                    </td>
-                                    <td class="text-center">
-                                        Amazing trip!
-                                    </td>
-                                    <td class="text-center">
-                                        Everything
-                                    </td>
-                                    <td class="text-center">
-                                        None
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        3820483
-                                    </td>
-                                    <td class="text-center">
-                                        482927394
-                                    </td>
-                                    <td class="text-center">
-                                        5
-                                    </td>
-                                    <td class="text-center">
-                                        Amazing trip!
-                                    </td>
-                                    <td class="text-center">
-                                        Everything
-                                    </td>
-                                    <td class="text-center">
-                                        None
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        3820483
-                                    </td>
-                                    <td class="text-center">
-                                        482927394
-                                    </td>
-                                    <td class="text-center">
-                                        5
-                                    </td>
-                                    <td class="text-center">
-                                        Amazing trip!
-                                    </td>
-                                    <td class="text-center">
-                                        Everything
-                                    </td>
-                                    <td class="text-center">
-                                        None
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection

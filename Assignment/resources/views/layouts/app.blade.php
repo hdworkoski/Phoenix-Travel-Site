@@ -33,7 +33,7 @@
     </div>
     <div class="main-panel">
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
             <div class="container-fluid">
                 <div class="navbar-wrapper">
                     @yield('title')
@@ -47,15 +47,27 @@
                 <div class="collapse navbar-collapse justify-content-end">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="material-icons">account_circle</i>
                                 <p class="d-lg-none d-md-block">
                                     Account
                                 </p>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                @if (\Illuminate\Support\Facades\Auth::guest())
+                                    <a class="dropdown-item" href="{{ route('login') }}">Login</a>
+                                @else
                                 <a class="dropdown-item" href="{{ url('/account') }}">View Account</a>
-                                <a class="dropdown-item" href="{{ url('/') }}">Sign Out</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                    Sign Out
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                                    {{ csrf_field() }}
+                                </form>
+                                    @endif
                             </div>
                         </li>
                     </ul>
@@ -86,12 +98,28 @@
 <script src="{{ asset('js/plugins/bootstrap-notify.js') }}"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ asset('js/material-dashboard.min.js?v=2.1.0') }}" type="text/javascript"></script>
-<!-- Material Dashboard DEMO methods, don't include it in your project! -->
-<script src="{{ asset('demo/demo.js') }}"></script>
 <script>
     $(document).ready(function() {
-        // Javascript method's body can be found in assets/js/demos.js
-        md.initDashboardPageCharts();
+
+        $(".btnDeleteTour").on('click', function() {
+            return confirm("Are you sure you want to delete this tour?");
+        });
+
+        $(".btnDeleteCustomer").on('click', function() {
+            return confirm("Are you sure you want to delete this customer?");
+        });
+
+        $(".btnDeleteItinerary").on('click', function() {
+            return confirm("Are you sure you want to delete this itinerary?");
+        });
+
+        $(".btnDeleteTrip").on('click', function() {
+            return confirm("Are you sure you want to delete this trip?");
+        });
+
+        $(".btnDeleteStaff").on('click', function() {
+            return confirm("Are you sure you want to delete this staff member?");
+        });
 
     });
 </script>

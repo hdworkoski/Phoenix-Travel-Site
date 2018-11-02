@@ -31,12 +31,14 @@
             <p>Trips</p>
         </a>
     </li>
+    @if(\Illuminate\Support\Facades\Auth::user()->role == 'manager')
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/staff') }}">
             <i class="material-icons">work</i>
             <p>Staff</p>
         </a>
     </li>
+    @endif
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/vehicles') }}">
             <i class="material-icons">directions_car</i>
@@ -56,20 +58,15 @@
 @endsection
 
 @section('content')
-    <div style="margin-left:55%;margin-right:5%;">
-        <div class="justify-content-end">
-            <form class="form-search justify-content-end">
-                <div class="input-group no-border">
-                    <input type="text" value="" class="form-control" placeholder="Search for a Trip...">
-                    <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                        <i class="material-icons">search</i>
-                        <div class="ripple-container"></div>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
     <div class="container-fluid">
+        @if($error == 1)
+            <div class="badge-danger">
+                You cannot delete a trip that has associated bookings.
+            </div>
+        @endif
+            <div class="row">
+                <a class="text-white" href="{{ url('/trip') }}"><button class="btn btn-default pull-left">Add New Trip</button></a>
+            </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -107,162 +104,52 @@
                                 </th>
                                 </thead>
                                 <tbody>
+                                @foreach($trips as $t)
                                 <tr>
-                                    <td class="text-info text-center">
-                                        1234567
+                                    <td class="text-center">
+                                        <form action="/trip/view/{{ $t->Trip_Id }}" method="GET">
+                                            {{ csrf_field() }}
+                                            <button type="submit" class="btn btn-white text-info">
+                                                {{ $t->Trip_Id }}
+                                            </button>
+                                        </form>
                                     </td>
                                     <td class="text-center">
-                                        1
+                                        {{ $t->Tour_No }}
                                     </td>
                                     <td class="text-center">
-                                        93dke9
+                                        {{ $t->Rego_No }}
                                     </td>
                                     <td class="text-center">
-                                        01/08/19
+                                        {{ $t->Departure_Date }}
                                     </td>
                                     <td class="text-center">
-                                        40
+                                        {{ $t->Max_Passengers }}
                                     </td>
                                     <td class="text-center">
-                                        $400
+                                        ${{ $t->Standard_Amount }}
                                     </td>
                                     <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
+                                        <form action="/trip/{{ $t->Trip_Id }}" method="GET">
+                                            {{ csrf_field() }}
+                                            {{ method_field('UPDATE') }}
+
+                                            <button type="submit" class="btn bg-white">
+                                                <i class="material-icons text-success">edit</i>
+                                            </button>
+                                        </form>
                                     </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
+                                    <form action="/trip/{{ $t->Trip_Id }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <td class="text-center">
+                                            <button type="submit" class="btn btn-white btnDeleteTrip">
+                                                <i class="material-icons text-danger">delete</i>
+                                            </button>
+                                        </td>
+                                    </form>
                                 </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        3802849
-                                    </td>
-                                    <td class="text-center">
-                                        2
-                                    </td>
-                                    <td class="text-center">
-                                        48ris3
-                                    </td>
-                                    <td class="text-center">
-                                        01/07/19
-                                    </td>
-                                    <td class="text-center">
-                                        50
-                                    </td>
-                                    <td class="text-center">
-                                        $700
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        5820483
-                                    </td>
-                                    <td class="text-center">
-                                        3
-                                    </td>
-                                    <td class="text-center">
-                                        28dkr9
-                                    </td>
-                                    <td class="text-center">
-                                        01/09/19
-                                    </td>
-                                    <td class="text-center">
-                                        45
-                                    </td>
-                                    <td class="text-center">
-                                        $650
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        2984938
-                                    </td>
-                                    <td class="text-center">
-                                        1
-                                    </td>
-                                    <td class="text-center">
-                                        93dke9
-                                    </td>
-                                    <td class="text-center">
-                                        01/10/19
-                                    </td>
-                                    <td class="text-center">
-                                        40
-                                    </td>
-                                    <td class="text-center">
-                                        $400
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        4903828
-                                    </td>
-                                    <td class="text-center">
-                                        4
-                                    </td>
-                                    <td class="text-center">
-                                        382ej4
-                                    </td>
-                                    <td class="text-center">
-                                        01/05/19
-                                    </td>
-                                    <td class="text-center">
-                                        25
-                                    </td>
-                                    <td class="text-center">
-                                        $250
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-info text-center">
-                                        4930283
-                                    </td>
-                                    <td class="text-center">
-                                        3
-                                    </td>
-                                    <td class="text-center">
-                                        28dkr9
-                                    </td>
-                                    <td class="text-center">
-                                        01/11/19
-                                    </td>
-                                    <td class="text-center">
-                                        40
-                                    </td>
-                                    <td class="text-center">
-                                        $400
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-gray">edit</i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="material-icons text-danger">delete</i>
-                                    </td>
-                                </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

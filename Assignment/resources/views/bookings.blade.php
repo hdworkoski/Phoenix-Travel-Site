@@ -31,12 +31,14 @@
             <p>Trips</p>
         </a>
     </li>
+    @if(\Illuminate\Support\Facades\Auth::user()->role == 'manager')
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/staff') }}">
             <i class="material-icons">work</i>
             <p>Staff</p>
         </a>
     </li>
+    @endif
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/vehicles') }}">
             <i class="material-icons">directions_car</i>
@@ -56,19 +58,6 @@
 @endsection
 
 @section('content')
-    <div style="margin-left:55%;margin-right:5%;">
-        <div class="justify-content-end">
-            <form class="form-search justify-content-end">
-                <div class="input-group no-border">
-                    <input type="text" value="" class="form-control" placeholder="Search for a Booking...">
-                    <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                        <i class="material-icons">search</i>
-                        <div class="ripple-container"></div>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
